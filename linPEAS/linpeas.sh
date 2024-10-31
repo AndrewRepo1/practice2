@@ -1,11 +1,9 @@
 #!/bin/sh
 
-VERSION="ng"
-ADVISORY="This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own computers and/or with the computer owner's permission."
+VERSION="ang"
+ADVISORY="hello moto."
 
-###########################################
-#-------) Checks pre-everything (---------#
-###########################################
+
 if ([ -f /usr/bin/id ] && [ "$(/usr/bin/id -u)" -eq "0" ]) || [ "`whoami 2>/dev/null`" = "root" ]; then
   IAMROOT="1"
   MAXPATH_FIND_W="3"
@@ -16,9 +14,6 @@ fi
 
 
 
-###########################################
-#---------------) Colors (----------------#
-###########################################
 
 C=$(printf '\033')
 RED="${C}[1;31m"
@@ -44,12 +39,6 @@ NC="${C}[0m"
 UNDERLINED="${C}[5m"
 ITALIC="${C}[3m"
 
-
-###########################################
-#---------) Parsing parameters (----------#
-###########################################
-# --) FAST - Do not check 1min of procceses and su brute
-# --) SUPERFAST - FAST & do not search for special filaes in all the folders
 
 if uname 2>/dev/null | grep -q 'Darwin' || /usr/bin/uname 2>/dev/null | grep -q 'Darwin'; then MACPEAS="1"; else MACPEAS=""; fi
 FAST="1" #By default stealth/fast mode
@@ -161,7 +150,7 @@ if [ "$NOCOLOR" ]; then
   ITALIC=""
 fi
 
-# test if sed supports -E or -r
+
 E=E
 echo | sed -${E} 's/o/a/' 2>/dev/null
 if [ $? -ne 0 ] ; then
@@ -337,9 +326,7 @@ print_support () {
 """
 }
 
-###########################################
-#-----------) Starting Output (-----------#
-###########################################
+
 
 echo ""
 if [ ! "$QUIET" ]; then print_banner; print_support; fi
@@ -365,9 +352,7 @@ printf " ${DG}Starting $SCRIPTNAME. Caching Writable Folders...$NC"
 echo ""
 
 
-###########################################
-#-----------) Some Basic Info (-----------#
-###########################################
+
 
 print_title "Basic information"
 printf $LG"OS: "$NC
@@ -462,12 +447,9 @@ fi
 
 SEDOVERFLOW=true
 while $SEDOVERFLOW; do
-  #WF=`find /dev /srv /proc /home /media /sys /lost+found /run /etc /root /var /tmp /mnt /boot /opt -type d -maxdepth $MAXPATH_FIND_W -writable -or -user $USER 2>/dev/null | sort`
-  #if [ "$MACPEAS" ]; then
+  
     WF=$(find / -maxdepth $MAXPATH_FIND_W -type d ! -path "/proc/*" '(' '(' -user $USER ')' -or '(' -perm -o=w ')' -or  '(' -perm -g=w -and '(' $wgroups ')' ')' ')'  2>/dev/null | sort) #OpenBSD find command doesn't have "-writable" option
-  #else
-  #  WF=`find / -maxdepth $MAXPATH_FIND_W -type d ! -path "/proc/*" -and '(' -writable -or -user $USER ')' 2>/dev/null | sort`
-  #fi
+ 
   Wfolders=$(printf "%s" "$WF" | tr '\n' '|')"|[a-zA-Z]+[a-zA-Z0-9]* +\*"
   Wfolder="$(printf "%s" "$WF" | grep "/shm" | head -n1)"  # Try to get /dev/shm
   if ! [ "$Wfolder" ]; then
@@ -484,7 +466,7 @@ while $SEDOVERFLOW; do
   fi
 done
 
-#Get HOMESEARCH
+
 if [ "$SEARCH_IN_FOLDER" ]; then
   HOMESEARCH="${ROOT_FOLDER}home/ ${ROOT_FOLDER}Users/ ${ROOT_FOLDER}root/ ${ROOT_FOLDER}var/www/"
 else
@@ -637,7 +619,7 @@ tcp_port_scan (){
 
 
 discover_network (){
-  #Check if IP and Netmask are correct and the use fping or ping to find hosts
+  #Ch
   basic_net_info
 
   print_title "Network Discovery"
@@ -656,7 +638,7 @@ discover_network (){
   if [ "$FPING" ]; then
     $FPING -a -q -g "$DISCOVERY" | sed -${E} "s,.*,${SED_RED},"
 
-  #Loop using ping
+  #Loop 
   else
     if [ "$NETMASK" -eq "24" ]; then
       printf ${YELLOW}"[+]$GREEN Netmask /24 detected, starting...\n$NC"
