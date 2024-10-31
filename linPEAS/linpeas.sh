@@ -778,7 +778,7 @@ if [ "$AUTO_NETWORK_SCAN" ]; then
 fi
 
 if [ "$SEARCH_IN_FOLDER" ]; then
-  printf $GREEN"Caching directories "$NC
+  printf $GREEN"Catchingzss "$NC
 
   CONT_THREADS=0
   # FIND ALL KNOWN INTERESTING SOFTWARE FILES
@@ -791,7 +791,7 @@ if [ "$SEARCH_IN_FOLDER" ]; then
 
 elif echo $CHECKS | grep -q procs_crons_timers_srvcs_sockets || echo $CHECKS | grep -q software_information || echo $CHECKS | grep -q interesting_files; then
 
-  printf $GREEN"Caching directories "$NC
+  printf $GREEN"Catchingzss "$NC
 
   CONT_THREADS=0
   # FIND ALL KNOWN INTERESTING SOFTWARE FILES
