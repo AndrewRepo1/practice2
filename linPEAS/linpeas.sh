@@ -347,14 +347,12 @@ if [ "$IAMROOT" ]; then
   echo "  YOU ARE ALREADY ROOT!!! (it could take longer to complete execution)" | sed "s,YOU ARE ALREADY ROOT!!!,${SED_RED_YELLOW},"
   sleep 3
 fi
-echo ""
-printf " ${DG}Starting $SCRIPTNAME. Caching Writable Folders...$NC"
-echo ""
 
 
 
 
-print_title "Basic information"
+
+print_title "Basicinformation"
 printf $LG"OS: "$NC
 (cat /proc/version || uname -a ) 2>/dev/null
 printf $LG"User & Groups: "$NC
